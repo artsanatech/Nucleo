@@ -3,59 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISTEMA ART-SANA [V.2.6]</title>
+    <title>ART-SANA CORE</title>
     <style>
-        :root { --neon: #00f2ff; --pink: #ff007a; --bg: #050505; }
-        body { background: var(--bg); color: var(--neon); font-family: 'Courier New', monospace; padding: 15px; text-transform: uppercase; font-size: 0.8rem; line-height: 1.4; display: flex; justify-content: center; }
-        .terminal { border: 1px solid var(--neon); padding: 15px; box-shadow: 0 0 20px rgba(0,242,255,0.1); max-width: 450px; width: 100%; background: #000; }
-        .header { color: var(--pink); border-bottom: 1px solid var(--pink); margin-bottom: 15px; font-weight: bold; text-align: center; font-size: 1rem; padding-bottom: 5px; }
-        .timer { font-size: 2.8rem; text-align: center; margin: 15px 0; color: #fff; text-shadow: 0 0 10px var(--neon); letter-spacing: 2px; }
-        .image-frame { width: 100%; border: 1px solid #333; margin: 15px 0; background: #111; position: relative; }
-        .image-frame img { width: 100%; display: block; filter: contrast(110%); }
-        .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border: 1px solid #222; padding: 10px; margin: 15px 0; background: #080808; }
-        .stat { color: #888; font-size: 0.7rem; } .val { color: var(--neon); font-weight: bold; }
-        .scan-line { width: 100%; height: 2px; background: var(--pink); position: absolute; top: 0; animation: scan 3s infinite linear; box-shadow: 0 0 10px var(--pink); }
-        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
-        .manifesto { border-left: 3px solid var(--pink); padding-left: 10px; margin: 20px 0; color: #e0e0e0; font-size: 0.75rem; text-align: justify; }
-        .footer-tag { text-align: center; color: var(--pink); font-weight: bold; margin-top: 20px; border-top: 1px solid #222; padding-top: 10px; font-size: 0.75rem; }
+        body { background: #000; color: #00f2ff; font-family: 'Courier New', monospace; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        
+        .header { width: 100%; max-width: 400px; border-left: 3px solid #ff007a; padding-left: 10px; margin-bottom: 30px; }
+        .header h1 { font-size: 1.2rem; margin: 0; color: #fff; letter-spacing: 2px; }
+        .header span { color: #ff007a; font-size: 0.7rem; }
+
+        .timer { font-size: 3.5rem; font-weight: bold; color: #fff; margin: 10px 0; }
+        .label { font-size: 0.6rem; color: #555; letter-spacing: 3px; }
+
+        .image-container { width: 100%; max-width: 350px; height: 250px; margin: 30px 0; border: 1px solid #1a1a1a; display: flex; align-items: center; justify-content: center; position: relative; }
+        .image-container img { max-width: 90%; max-height: 90%; filter: drop-shadow(0 0 10px #00f2ff55); }
+        
+        /* Barras de Atributos */
+        .stats-container { width: 100%; max-width: 350px; margin-bottom: 30px; }
+        .stat-row { margin-bottom: 15px; }
+        .stat-label { font-size: 0.7rem; display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .bar-bg { width: 100%; height: 4px; background: #111; }
+        .bar-fill { height: 100%; background: #00f2ff; box-shadow: 0 0 10px #00f2ff; }
+
+        .footer { text-align: center; margin-top: 40px; font-size: 0.8rem; color: #ff007a; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="terminal">
-    <div class="header">SISTEMA ART-SANA [V.2.6]</div>
-    
-    <p style="text-align: center; margin-bottom: 5px;">ESTADO: <span style="color:#fff">METABOLIZACIÓN ACTIVA</span></p>
-    <div class="timer" id="timer">28:45</div>
-    
-    <div class="image-frame">
-        <div class="scan-line"></div>
-        <img src="producto.jpg" onerror="this.src='https://via.placeholder.com/400x300/000/00f2ff?text=ESCANEANDO+UNIDAD...'">
-    </div>
+<div class="header">
+    <h1>ART-SANA [V.2.6]</h1>
+    <span>ESTADO: METABOLIZANDO UNIDAD_PGP</span>
+</div>
 
-    <div class="data-grid">
-        <div class="stat">UNIDAD: <span class="val">POWER GRAIN PRO</span></div>
-        <div class="stat">ENERGÍA: <span class="val">70%</span></div>
-        <div class="stat">ENFOQUE: <span class="val">40%</span></div>
-        <div class="stat">RECUPERACIÓN: <span class="val">30%</span></div>
-    </div>
+<div class="label">TIEMPO PARA ACTIVACIÓN</div>
+<div class="timer" id="timer">28:45</div>
 
-    <div class="manifesto">
-        <span style="color:var(--neon)">BIENVENIDO AL NÚCLEO.</span> Has desbloqueado la <span style="color:var(--pink)">7 SEEDS MATRIX</span>. Lo que tienes en tus manos es arquitectura nutricional diseñada para tu soberanía metabólica.
-    </div>
+<div class="image-container">
+    <img src="producto.jpg" onerror="this.src='https://via.placeholder.com/300x200/000/00f2ff?text=POWER+GRAIN+PRO'">
+</div>
 
-    <p style="font-size: 0.65rem; color: #555; text-align: center;">COMPONENTES: SOYA, AVENA, CHÍA, MANÍ, SÉSAMO, LINAZA, CALABAZA.</p>
-
-    <div class="footer-tag">
-        ESA ES UNA GOLOSINA. ESTO ES ART-SANA.
+<div class="stats-container">
+    <div class="stat-row">
+        <div class="stat-label"><span>ENERGÍA</span><span>70%</span></div>
+        <div class="bar-bg"><div class="bar-fill" style="width: 70%;"></div></div>
     </div>
+    <div class="stat-row">
+        <div class="stat-label"><span>ENFOQUE</span><span>40%</span></div>
+        <div class="bar-bg"><div class="bar-fill" style="width: 40%;"></div></div>
+    </div>
+    <div class="stat-row">
+        <div class="stat-label" style="color:#ff007a;"><span>7 SEEDS MATRIX</span><span>ACTIVE</span></div>
+        <div class="bar-bg" style="background:#200;"><div class="bar-fill" style="width: 100%; background:#ff007a; box-shadow: 0 0 10px #ff007a;"></div></div>
+    </div>
+</div>
+
+<div class="footer">
+    ESA ES UNA GOLOSINA.<br>ESTO ES ART-SANA.
 </div>
 
 <script>
     let t = 28 * 60 + 45;
     setInterval(() => {
-        if (t <= 0) return;
-        t--;
+        if (t > 0) t--;
         let m = Math.floor(t / 60), s = t % 60;
         document.getElementById('timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
     }, 1000);
