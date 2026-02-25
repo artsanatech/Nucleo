@@ -2,50 +2,59 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ART-SANA CORE</title>
     <style>
-        :root { --blue: #00f2ff; --bg: #000000; }
+        :root { --neon: #00f2ff; --bg: #000000; --white: #ffffff; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { 
-            background: var(--bg); color: var(--blue); 
+            background: var(--bg); color: var(--neon); 
             font-family: 'Courier New', monospace; margin: 0; 
-            text-transform: uppercase; font-size: 1.25rem; /* +20% */
+            text-transform: uppercase; font-size: 1.2rem;
+            overflow: hidden; /* Ajuste estricto al tamaño de pantalla */
         }
         .container { 
-            max-width: 500px; margin: auto; height: 100vh; 
-            display: flex; flex-direction: column; padding: 30px; box-sizing: border-box; 
+            width: 100vw; height: 100vh; 
+            display: flex; flex-direction: column; padding: 25px; 
         }
-        .tab { display: none; height: 100%; flex-direction: column; }
+        .tab { display: none; height: 100%; flex-direction: column; width: 100%; }
         .active { display: flex; }
 
-        /* PESTAÑA 1 */
-        .header { border-left: 6px solid var(--blue); padding-left: 15px; margin-bottom: 20px; }
-        .header h1 { font-size: 2.4rem; margin: 0; color: #fff; }
-        .info { font-size: 1.1rem; margin-bottom: 10px; }
-        
+        /* PESTAÑA 1: HOME */
+        .header { border-left: 6px solid var(--neon); padding-left: 15px; margin-bottom: 20px; }
+        .header h1 { font-size: 2.2rem; margin: 0; color: var(--white); }
+        .info { font-size: 1.1rem; margin-bottom: 10px; color: var(--white); } /* Textos en blanco */
+        .label-tech { color: var(--neon); font-size: 0.8rem; }
+
         .clock-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .clock { font-size: 6rem; color: #fff; text-shadow: 0 0 20px var(--blue); }
+        .clock { font-size: 5.5rem; color: var(--white); text-shadow: 0 0 20px var(--neon); font-weight: bold; }
         
-        .bars { margin-bottom: 30px; }
-        .bar-row { margin-bottom: 15px; }
-        .bar-bg { width: 100%; height: 12px; background: #111; border: 1px solid #333; margin-top: 5px; }
-        .bar-fill { height: 100%; background: var(--blue); box-shadow: 0 0 15px var(--blue); }
+        .bars { margin-bottom: 20px; }
+        .bar-row { margin-bottom: 15px; font-size: 0.9rem; }
+        .bar-bg { width: 100%; height: 10px; background: #111; border: 1px solid #333; margin-top: 5px; }
+        .bar-fill { height: 100%; background: var(--neon); box-shadow: 0 0 15px var(--neon); }
 
-        /* PESTAÑA 2 */
-        .scroll { overflow-y: auto; flex-grow: 1; }
-        .item { border-left: 3px solid var(--blue); padding-left: 15px; margin-bottom: 25px; }
-        .item p { text-transform: none; font-size: 1rem; color: #ccc; }
+        /* PESTAÑA 2: DIAGRAMA (IGUAL A LA IMAGEN) */
+        .diagram-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        .phase { margin-bottom: 20px; }
+        .phase-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.85rem; color: var(--neon); }
+        .phase-action { text-transform: none; font-size: 0.8rem; color: var(--white); margin: 5px 0; line-height: 1.2; }
+        .phase-action b { color: var(--neon); }
 
-        /* PESTAÑA 3 */
-        .story { text-transform: none; line-height: 1.6; text-align: justify; flex-grow: 1; }
-        .locked { border: 2px solid #222; color: #444; padding: 20px; text-align: center; margin: 20px 0; }
+        /* PESTAÑA 3: HISTORIA CENTRADA */
+        .story-center { 
+            flex-grow: 1; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; 
+            text-align: center; color: var(--white); text-transform: none;
+            line-height: 1.6; font-size: 1.1rem;
+        }
+        .locked-zone { border: 1px solid #333; color: #444; padding: 15px; width: 100%; margin: 20px 0; font-size: 0.8rem; }
 
         .btn { 
-            background: var(--blue); color: #000; border: none; 
-            padding: 22px; font-weight: bold; font-family: 'Courier New';
-            font-size: 1.1rem; cursor: pointer; width: 100%;
+            background: var(--neon); color: #000; border: none; 
+            padding: 20px; font-weight: bold; font-family: 'Courier New';
+            font-size: 1rem; cursor: pointer; width: 100%; border-radius: 2px;
         }
-        .slogan { text-align: center; padding: 20px 0; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -53,11 +62,14 @@
 <div class="container">
     <div id="p1" class="tab active">
         <div class="header"><h1>ART-SANA</h1></div>
-        <div class="info">UNIDAD: POWER GRAIN PRO<br>ESTADO: METABOLIZANDO</div>
+        <div class="info">
+            <span class="label-tech">UNIDAD:</span> POWER GRAIN PRO<br>
+            <span class="label-tech">ESTADO:</span> METABOLIZANDO...
+        </div>
         
         <div class="clock-area">
             <div class="clock" id="timer">28:45</div>
-            <div style="font-size:0.7rem; letter-spacing:4px;">ABSORCIÓN ESTIMADA</div>
+            <div style="font-size:0.6rem; letter-spacing:4px; color: var(--white);">ABSORCIÓN ESTIMADA</div>
         </div>
 
         <div class="bars">
@@ -69,23 +81,40 @@
 
     <div id="p2" class="tab">
         <div class="header"><h1>ABSORCIÓN</h1></div>
-        <div class="scroll">
-            <div class="item"><h3>FASE 1</h3><p>Detección de bio-catalizadores. Carga de electrolitos.</p></div>
-            <div class="item"><h3>FASE 2</h3><p>7 Seeds Matrix. Estabilización neuronal.</p></div>
-            <div class="item"><h3>FASE 3</h3><p>Integración de aminoácidos. Flujo lineal.</p></div>
-            <div class="item"><h3>FASE 4</h3><p>Homeostasis. Sistema en línea.</p></div>
+        <div class="diagram-area">
+            <div class="phase">
+                <div class="phase-header"><span>FASE 1: BIO-RECONOCIMIENTO</span><span>25%</span></div>
+                <div class="phase-action"><b>ACCIÓN:</b> DETECCIÓN DE BIO-CATALIZADORES. INICIO DE CARGA DE ELECTROLITOS.</div>
+                <div class="bar-bg"><div class="bar-fill" style="width:25%"></div></div>
+            </div>
+            <div class="phase">
+                <div class="phase-header"><span>FASE 2: DESPLIEGUE ESTRUCTURAL</span><span>50%</span></div>
+                <div class="phase-action"><b>ACCIÓN:</b> 7 SEEDS MATRIX EN PROCESO. ESTABILIZACIÓN NEURONAL PARA EL ENFOQUE.</div>
+                <div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div>
+            </div>
+            <div class="phase">
+                <div class="phase-header"><span>FASE 3: SINTONÍA DE ENERGÍA</span><span>75%</span></div>
+                <div class="phase-action"><b>ACCIÓN:</b> INTEGRACIÓN DE AMINOÁCIDOS. LA FIBRA SELLA EL FLUJO LINEAL.</div>
+                <div class="bar-bg"><div class="bar-fill" style="width:75%"></div></div>
+            </div>
+            <div class="phase">
+                <div class="phase-header"><span>FASE 4: SISTEMA EN LÍNEA</span><span>100%</span></div>
+                <div class="phase-action"><b>ACCIÓN:</b> HOMEOSTASIS COMPLETADA. OPERANDO BAJO ART-SANA.</div>
+                <div class="bar-bg"><div class="bar-fill" style="width:100%"></div></div>
+            </div>
         </div>
-        <button class="btn" onclick="go(3)">VER MANIFIESTO</button>
+        <button class="btn" onclick="go(3)">MANIFIESTO</button>
     </div>
 
     <div id="p3" class="tab">
         <div class="header"><h1>OBJETIVO</h1></div>
-        <div class="story">
-            Nos distanciamos de lo químico porque el cuerpo exige arquitectura real. Usamos el poder de lo natural y local para que tu metabolismo recupere su soberanía.
+        <div class="story-center">
+            "Nos distanciamos de lo químico porque el cuerpo exige arquitectura real. Usamos el poder de lo natural y local para que tu metabolismo recupere su soberanía."
+            <br><br>
+            <b style="color: var(--neon); font-size: 1.2rem;">SOMOS ART-SANA,<br>LO DEMÁS SON GOLOSINAS.</b>
         </div>
-        <div class="slogan">SOMOS ART-SANA, LO DEMÁS SON GOLOSINAS.</div>
-        <div class="locked">🔒 RED VITALY BLOQUEADA</div>
-        <button class="btn" style="background:#222; color:#555" onclick="go(1)">REINICIAR</button>
+        <div class="locked-zone">🔒 RED VITALY: NIVEL II REQUERIDO</div>
+        <button class="btn" style="background:#111; color:#444; border: 1px solid #333;" onclick="go(1)">REINICIAR SISTEMA</button>
     </div>
 </div>
 
@@ -93,6 +122,7 @@
     function go(n) {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         document.getElementById('p'+n).classList.add('active');
+        window.scrollTo(0,0);
     }
     let s = 1725;
     setInterval(() => {
