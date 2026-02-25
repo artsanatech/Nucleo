@@ -1,73 +1,23 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ART-SANA CORE</title>
-    <style>
-        body { background: #000; color: #00f2ff; font-family: 'Courier New', monospace; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        
-        .header { width: 100%; max-width: 400px; border-left: 3px solid #ff007a; padding-left: 10px; margin-bottom: 30px; }
-        .header h1 { font-size: 1.2rem; margin: 0; color: #fff; letter-spacing: 2px; }
-        .header span { color: #ff007a; font-size: 0.7rem; }
+<section style="font-family: sans-serif; color: #003366; background-color: #ffffff; padding: 20px; border: 2px solid #0055ff;">
+  
+  <h1 style="color: #0055ff; border-bottom: 2px solid #0055ff;">🟦 ARCHIVO DE INGENIERÍA: DIAGRAMA DE ABSORCIÓN</h1>
+  
+  <div style="margin-top: 20px;">
+    <h3 style="color: #003366;">01. FASE DE BIO-RECONOCIMIENTO [00:00 - 05:00]</h3>
+    <p style="border-left: 4px solid #0055ff; padding-left: 10px; font-style: italic;">
+      Identificación de nutrientes y liberación de electrolitos.
+    </p>
+    <span style="color: #0055ff; font-weight: bold;">[ESTADO: 🔵 25% CARGADO]</span>
+  </div>
 
-        .timer { font-size: 3.5rem; font-weight: bold; color: #fff; margin: 10px 0; }
-        .label { font-size: 0.6rem; color: #555; letter-spacing: 3px; }
+  <div style="margin-top: 30px; display: flex; gap: 20px;">
+    <button style="background-color: #0055ff; color: white; border: none; padding: 10px 20px; cursor: pointer;">
+      ARQUITECTURA NUTRICIONAL
+    </button>
+    
+    <button disabled style="background-color: #cccccc; color: #666666; border: 1px solid #999999; padding: 10px 20px; cursor: not-allowed;">
+      🔒 RED VITALY (BLOQUEADO)
+    </button>
+  </div>
 
-        .image-container { width: 100%; max-width: 350px; height: 250px; margin: 30px 0; border: 1px solid #1a1a1a; display: flex; align-items: center; justify-content: center; position: relative; }
-        .image-container img { max-width: 90%; max-height: 90%; filter: drop-shadow(0 0 10px #00f2ff55); }
-        
-        /* Barras de Atributos */
-        .stats-container { width: 100%; max-width: 350px; margin-bottom: 30px; }
-        .stat-row { margin-bottom: 15px; }
-        .stat-label { font-size: 0.7rem; display: flex; justify-content: space-between; margin-bottom: 5px; }
-        .bar-bg { width: 100%; height: 4px; background: #111; }
-        .bar-fill { height: 100%; background: #00f2ff; box-shadow: 0 0 10px #00f2ff; }
-
-        .footer { text-align: center; margin-top: 40px; font-size: 0.8rem; color: #ff007a; font-weight: bold; }
-    </style>
-</head>
-<body>
-
-<div class="header">
-    <h1>ART-SANA [V.2.6]</h1>
-    <span>ESTADO: METABOLIZANDO UNIDAD_PGP</span>
-</div>
-
-<div class="label">TIEMPO PARA ACTIVACIÓN</div>
-<div class="timer" id="timer">28:45</div>
-
-<div class="image-container">
-    <img src="producto.jpg" onerror="this.src='https://via.placeholder.com/300x200/000/00f2ff?text=POWER+GRAIN+PRO'">
-</div>
-
-<div class="stats-container">
-    <div class="stat-row">
-        <div class="stat-label"><span>ENERGÍA</span><span>70%</span></div>
-        <div class="bar-bg"><div class="bar-fill" style="width: 70%;"></div></div>
-    </div>
-    <div class="stat-row">
-        <div class="stat-label"><span>ENFOQUE</span><span>40%</span></div>
-        <div class="bar-bg"><div class="bar-fill" style="width: 40%;"></div></div>
-    </div>
-    <div class="stat-row">
-        <div class="stat-label" style="color:#ff007a;"><span>7 SEEDS MATRIX</span><span>ACTIVE</span></div>
-        <div class="bar-bg" style="background:#200;"><div class="bar-fill" style="width: 100%; background:#ff007a; box-shadow: 0 0 10px #ff007a;"></div></div>
-    </div>
-</div>
-
-<div class="footer">
-    ESA ES UNA GOLOSINA.<br>ESTO ES ART-SANA.
-</div>
-
-<script>
-    let t = 28 * 60 + 45;
-    setInterval(() => {
-        if (t > 0) t--;
-        let m = Math.floor(t / 60), s = t % 60;
-        document.getElementById('timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
-    }, 1000);
-</script>
-
-</body>
-</html>
+</section>
