@@ -3,50 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISTEMA ART-SANA [V.2.6]</title>
+    <title>ART-SANA | CORE</title>
     <style>
-        body { background-color: #0a0a0a; color: #00f2ff; font-family: 'Courier New', monospace; padding: 20px; text-transform: uppercase; }
-        .console { border: 1px solid #00f2ff; padding: 20px; background: #000; box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); }
-        .header { color: #ff007a; font-weight: bold; border-bottom: 1px solid #ff007a; margin-bottom: 15px; }
-        .timer { font-size: 2.5rem; text-align: center; margin: 20px 0; color: #fff; }
-        .msg { font-size: 0.85rem; line-height: 1.6; margin-bottom: 20px; color: #e0e0e0; }
-        .highlight { color: #00f2ff; }
-        .btn-mision { width: 100%; padding: 15px; background: transparent; border: 1px solid #ff007a; color: #ff007a; cursor: pointer; font-weight: bold; }
+        body { background-color: #050505; color: #00f2ff; font-family: 'Courier New', monospace; padding: 20px; text-transform: uppercase; font-size: 0.85rem; }
+        .terminal { border: 1px solid #00f2ff; padding: 15px; box-shadow: 0 0 15px #00f2ff44; max-width: 500px; margin: auto; }
+        .header { color: #ff007a; border-bottom: 1px solid #ff007a; margin-bottom: 15px; font-weight: bold; text-align: center; }
+        .timer { font-size: 2.2rem; text-align: center; margin: 15px 0; color: #fff; text-shadow: 0 0 8px #00f2ff; }
+        .ficha-tecnica { display: none; margin-top: 20px; border-top: 1px dashed #00f2ff; padding-top: 20px; animation: fadeIn 1s; }
+        .product-img { width: 100%; border: 1px solid #333; margin-bottom: 15px; filter: grayscale(50%) contrast(120%); }
+        .stat-row { display: flex; justify-content: space-between; margin-bottom: 5px; border-bottom: 1px solid #1a1a1a; }
+        .btn-mision { width: 100%; padding: 15px; background: transparent; border: 1px solid #ff007a; color: #ff007a; font-weight: bold; margin-top: 20px; cursor: pointer; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
-<div class="console">
-    <div class="header">SISTEMA ART-SANA FOOD TECH [V.2.6]</div>
-    
-    <div class="msg">
-        USUARIO IDENTIFICADO: Consumidor de Alto Rendimiento.<br>
-        ESTADO DE LA UNIDAD: <span class="highlight">En proceso de metabolización.</span><br><br>
-        BIENVENIDO AL NÚCLEO.<br>
-        Lo que tienes en tus manos no es el resultado de una receta, sino de una arquitectura nutricional diseñada para romper el ciclo de las golosinas industriales.
+<div class="terminal">
+    <div id="pantalla-inicio">
+        <div class="header">SISTEMA ART-SANA FOOD TECH [V.2.6]</div>
+        <p>USUARIO: <span style="color:#fff">CONSUMIDOR DE ALTO RENDIMIENTO</span></p>
+        <p>BIENVENIDO AL NÚCLEO. Esta es la arquitectura nutricional diseñada para tu soberanía metabólica.</p>
+
+        <div class="timer" id="timer">28:45</div>
+        <p style="text-align: center; font-size: 0.6rem;">TIEMPO PARA ACTIVACIÓN DE NUTRIENTES</p>
+
+        <button class="btn-mision" onclick="activarEscaneo()">[INICIAR ESCANEO DE COMPONENTES ↓]</button>
     </div>
 
-    <div class="timer" id="timer">28:45</div>
-    <div style="text-align: center; font-size: 0.6rem; margin-bottom: 20px;">TIEMPO ESTIMADO PARA ACTIVACIÓN DE NUTRIENTES</div>
+    <div id="ficha" class="ficha-tecnica">
+        <div class="header" style="color:#00f2ff; border-color:#00f2ff">UNIDAD: POWER GRAIN PRO</div>
+        
+        <img src="https://via.placeholder.com/400x250/000/00f2ff?text=POWER+GRAIN+PRO+IMAGE" alt="Power Grain Pro" class="product-img">
 
-    <div class="msg">
-        Has desbloqueado el acceso a la <span class="highlight">7 Seeds Matrix</span>. Estás a punto de entender por qué tu cuerpo se siente diferente. Estás a punto de conocer la ingeniería detrás de tu fuerza.
+        <div class="stat-row"><span>ENERGÍA:</span> <span>70%</span></div>
+        <div class="stat-row"><span>ENFOQUE:</span> <span>40%</span></div>
+        <div class="stat-row"><span>RECUPERACIÓN:</span> <span>30%</span></div>
+        <div class="stat-row"><span>SABOR:</span> <span>TOSTADO / CEREAL</span></div>
+        
+        <p style="margin-top:15px; font-size: 0.7rem; color: #888;">
+            COMPOSICIÓN: 7 SEEDS MATRIX (SOYA, AVENA, CHÍA, MANÍ, SÉSAMO, LINAZA, CALABAZA).
+        </p>
+        
+        <p style="color: #ff007a; font-size: 0.75rem; margin-top: 15px; border: 1px solid #ff007a; padding: 10px;">
+            MISIÓN: No buscamos picos de euforia, buscamos la soberanía de tu metabolismo.
+        </p>
     </div>
-
-    <button class="btn-mision" onclick="alert('MISIÓN: Establecimiento de Homeostasis. Tu misión es utilizar la 7 Seeds Matrix como cimiento para una estructura de energía lineal. No buscamos picos de euforia, buscamos la soberanía de tu metabolismo. El sistema está en línea.')">
-        [INICIAR ESCANEO DE COMPONENTES ↓]
-    </button>
 </div>
 
 <script>
-    let time = 28 * 60 + 45;
-    setInterval(() => {
-        if (time <= 0) return;
-        time--;
-        let min = Math.floor(time / 60);
-        let sec = time % 60;
-        document.getElementById('timer').innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
-    }, 1000);
+    // Timer
+    let t = 28 * 60 + 45;
+    setInterval(() => { if (t > 0) { t--; let m = Math.floor(t / 60), s = t % 60; document.getElementById('timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`; } }, 1000);
+
+    // Función para mostrar la ficha
+    function activarEscaneo() {
+        document.getElementById('ficha').style.display = 'block';
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
 </script>
 
 </body>
