@@ -3,165 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ART-SANA | CORE SYSTEM</title>
+    <title>ART-SANA CORE</title>
     <style>
-        :root { 
-            --neon-blue: #00f2ff; 
-            --bg-black: #050505;
-            --gray-text: #aaa;
-        }
+        :root { --blue: #00f2ff; --bg: #000000; }
         body { 
-            background: var(--bg-black); color: var(--neon-blue); 
-            font-family: 'Courier New', monospace; margin: 0; padding: 0; 
-            text-transform: uppercase; font-size: 1.2rem; /* Aumento del 20% base */
+            background: var(--bg); color: var(--blue); 
+            font-family: 'Courier New', monospace; margin: 0; 
+            text-transform: uppercase; font-size: 1.25rem; /* +20% */
         }
         .container { 
             max-width: 500px; margin: auto; height: 100vh; 
             display: flex; flex-direction: column; padding: 30px; box-sizing: border-box; 
         }
-        
-        /* Gestión de Pestañas */
         .tab { display: none; height: 100%; flex-direction: column; }
-        .tab.active { display: flex; }
+        .active { display: flex; }
 
-        /* PESTAÑA 1: HOME */
-        .header-box { border-left: 6px solid var(--neon-blue); padding-left: 20px; margin-bottom: 30px; }
-        .header-box h1 { font-size: 2.2rem; margin: 0; letter-spacing: 3px; color: #fff; }
+        /* PESTAÑA 1 */
+        .header { border-left: 6px solid var(--blue); padding-left: 15px; margin-bottom: 20px; }
+        .header h1 { font-size: 2.4rem; margin: 0; color: #fff; }
+        .info { font-size: 1.1rem; margin-bottom: 10px; }
         
-        .unit-data { font-size: 1rem; margin-bottom: 20px; line-height: 1.5; }
+        .clock-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .clock { font-size: 6rem; color: #fff; text-shadow: 0 0 20px var(--blue); }
         
-        /* Reloj Centrado */
-        .timer-section { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .timer-display { font-size: 5.5rem; color: #fff; text-shadow: 0 0 20px var(--neon-blue); font-weight: bold; }
-        .timer-label { font-size: 0.7rem; color: var(--gray-text); letter-spacing: 5px; margin-top: 10px; }
+        .bars { margin-bottom: 30px; }
+        .bar-row { margin-bottom: 15px; }
+        .bar-bg { width: 100%; height: 12px; background: #111; border: 1px solid #333; margin-top: 5px; }
+        .bar-fill { height: 100%; background: var(--blue); box-shadow: 0 0 15px var(--blue); }
 
-        /* Barras */
-        .stats-block { margin-bottom: 30px; }
-        .bar-row { margin-bottom: 20px; }
-        .bar-meta { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; }
-        .bar-bg { width: 100%; height: 10px; background: #111; border: 1px solid #333; }
-        .bar-fill { height: 100%; background: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue); }
+        /* PESTAÑA 2 */
+        .scroll { overflow-y: auto; flex-grow: 1; }
+        .item { border-left: 3px solid var(--blue); padding-left: 15px; margin-bottom: 25px; }
+        .item p { text-transform: none; font-size: 1rem; color: #ccc; }
 
-        /* PESTAÑA 2: DIAGRAMA */
-        .scroll-area { overflow-y: auto; flex-grow: 1; margin-bottom: 20px; }
-        .phase-item { border-left: 3px solid var(--neon-blue); padding-left: 20px; margin-bottom: 30px; }
-        .phase-item h3 { font-size: 1.1rem; margin: 0; color: #fff; }
-        .phase-item p { font-size: 0.9rem; text-transform: none; color: var(--gray-text); margin-top: 10px; line-height: 1.4; }
+        /* PESTAÑA 3 */
+        .story { text-transform: none; line-height: 1.6; text-align: justify; flex-grow: 1; }
+        .locked { border: 2px solid #222; color: #444; padding: 20px; text-align: center; margin: 20px 0; }
 
-        /* PESTAÑA 3: HISTORIA */
-        .story-box { text-transform: none; font-size: 1.1rem; line-height: 1.6; color: #eee; text-align: justify; flex-grow: 1; overflow-y: auto; }
-        .story-box b { color: var(--neon-blue); }
-
-        /* Botones */
-        .nav-btn { 
-            background: transparent; border: 2px solid var(--neon-blue); color: var(--neon-blue); 
-            padding: 25px; font-weight: bold; cursor: pointer; 
-            font-family: 'Courier New', monospace; font-size: 1rem; width: 100%;
+        .btn { 
+            background: var(--blue); color: #000; border: none; 
+            padding: 22px; font-weight: bold; font-family: 'Courier New';
+            font-size: 1.1rem; cursor: pointer; width: 100%;
         }
-        .nav-btn:active { background: var(--neon-blue); color: #000; }
-        
-        .locked-btn { border: 2px solid #333; color: #444; padding: 20px; text-align: center; font-size: 0.9rem; margin-top: 20px; }
-        .footer-tag { text-align: center; font-size: 1rem; margin: 25px 0; color: var(--neon-blue); font-weight: bold; }
+        .slogan { text-align: center; padding: 20px 0; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    
-    <div id="tab1" class="tab active">
-        <div class="header-box">
-            <h1>ART-SANA</h1>
-            <div style="font-size: 0.8rem;">SISTEMA DE INGENIERÍA V.2.6</div>
-        </div>
-
-        <div class="unit-data">
-            <div>UNIDAD: POWER GRAIN PRO</div>
-            <div>ESTADO: METABOLIZANDO...</div>
-        </div>
-
-        <div class="timer-section">
-            <div class="timer-display" id="time1">28:45</div>
-            <div class="timer-label">ABSORCIÓN ESTIMADA</div>
-        </div>
-
-        <div class="stats-block">
-            <div class="bar-row">
-                <div class="bar-meta"><span>ENERGÍA</span><span>70%</span></div>
-                <div class="bar-bg"><div class="bar-fill" style="width: 70%;"></div></div>
-            </div>
-            <div class="bar-row">
-                <div class="bar-meta"><span>ENFOQUE</span><span>40%</span></div>
-                <div class="bar-bg"><div class="bar-fill" style="width: 40%;"></div></div>
-            </div>
-        </div>
-
-        <button class="nav-btn" onclick="openTab('tab2')">
-            > ARQUITECTURA NUTRICIONAL
-        </button>
-    </div>
-
-    <div id="tab2" class="tab">
-        <div class="header-box"><h1>ABSORCIÓN</h1></div>
-        <div class="scroll-area">
-            <div class="phase-item">
-                <h3>FASE 1: BIO-RECONOCIMIENTO</h3>
-                <p>El sistema detecta bio-catalizadores. Inicio de carga de electrolitos y glucosa inicial.</p>
-            </div>
-            <div class="phase-item">
-                <h3>FASE 2: DESPLIEGUE ESTRUCTURAL</h3>
-                <p>7 Seeds Matrix en flujo. El magnesio inicia la estabilización neuronal.</p>
-            </div>
-            <div class="phase-item">
-                <h3>FASE 3: SINTONÍA DE ENERGÍA</h3>
-                <p>Integración de aminoácidos y carbohidratos. La fibra sella el flujo lineal.</p>
-            </div>
-            <div class="phase-item">
-                <h3>FASE 4: SISTEMA EN LÍNEA</h3>
-                <p>Homeostasis completada. Operando bajo arquitectura Art-Sana.</p>
-            </div>
-        </div>
-        <button class="nav-btn" onclick="openTab('tab3')">> MANIFIESTO</button>
-    </div>
-
-    <div id="tab3" class="tab">
-        <div class="header-box"><h1>OBJETIVO</h1></div>
-        <div class="story-box">
-            En <b>Art-Sana</b> buscamos <b>desprogramar</b> la industria. Nos distanciamos de lo químico porque el cuerpo exige <b>arquitectura real</b>.<br><br>
-            Creemos en el poder de lo <b>natural y local</b>. Procesamos ingredientes de nuestra tierra con ingeniería para que tu metabolismo recupere su soberanía.
-        </div>
-
-        <div class="footer-tag">SOMOS ART-SANA, LO DEMÁS SON GOLOSINAS.</div>
+    <div id="p1" class="tab active">
+        <div class="header"><h1>ART-SANA</h1></div>
+        <div class="info">UNIDAD: POWER GRAIN PRO<br>ESTADO: METABOLIZANDO</div>
         
-        <div class="locked-btn">
-            🔒 RED VITALY: BLOQUEADA
+        <div class="clock-area">
+            <div class="clock" id="timer">28:45</div>
+            <div style="font-size:0.7rem; letter-spacing:4px;">ABSORCIÓN ESTIMADA</div>
         </div>
 
-        <button class="nav-btn" style="border-color:#444; color:#444; margin-top:15px;" onclick="openTab('tab1')">REINICIAR</button>
+        <div class="bars">
+            <div class="bar-row">ENERGÍA 70% <div class="bar-bg"><div class="bar-fill" style="width:70%"></div></div></div>
+            <div class="bar-row">ENFOQUE 40% <div class="bar-bg"><div class="bar-fill" style="width:40%"></div></div></div>
+        </div>
+        <button class="btn" onclick="go(2)">ARQUITECTURA NUTRICIONAL</button>
     </div>
 
+    <div id="p2" class="tab">
+        <div class="header"><h1>ABSORCIÓN</h1></div>
+        <div class="scroll">
+            <div class="item"><h3>FASE 1</h3><p>Detección de bio-catalizadores. Carga de electrolitos.</p></div>
+            <div class="item"><h3>FASE 2</h3><p>7 Seeds Matrix. Estabilización neuronal.</p></div>
+            <div class="item"><h3>FASE 3</h3><p>Integración de aminoácidos. Flujo lineal.</p></div>
+            <div class="item"><h3>FASE 4</h3><p>Homeostasis. Sistema en línea.</p></div>
+        </div>
+        <button class="btn" onclick="go(3)">VER MANIFIESTO</button>
+    </div>
+
+    <div id="p3" class="tab">
+        <div class="header"><h1>OBJETIVO</h1></div>
+        <div class="story">
+            Nos distanciamos de lo químico porque el cuerpo exige arquitectura real. Usamos el poder de lo natural y local para que tu metabolismo recupere su soberanía.
+        </div>
+        <div class="slogan">SOMOS ART-SANA, LO DEMÁS SON GOLOSINAS.</div>
+        <div class="locked">🔒 RED VITALY BLOQUEADA</div>
+        <button class="btn" style="background:#222; color:#555" onclick="go(1)">REINICIAR</button>
+    </div>
 </div>
 
 <script>
-    function openTab(tabId) {
-        // Oculta todas las pestañas
-        var tabs = document.getElementsByClassName("tab");
-        for (var i = 0; i < tabs.length; i++) {
-            tabs[i].style.display = "none";
-        }
-        // Muestra la seleccionada
-        document.getElementById(tabId).style.display = "flex";
-        window.scrollTo(0,0);
+    function go(n) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById('p'+n).classList.add('active');
     }
-
-    // Timer Funcionando
-    let t = 28 * 60 + 45;
+    let s = 1725;
     setInterval(() => {
-        if (t > 0) t--;
-        let m = Math.floor(t / 60), s = t % 60;
-        let display = `${m}:${s < 10 ? '0' : ''}${s}`;
-        document.getElementById('time1').innerText = display;
+        if(s>0) s--;
+        let m=Math.floor(s/60), r=s%60;
+        document.getElementById('timer').innerText = m+":"+(r<10?'0':'')+r;
     }, 1000);
 </script>
-
 </body>
 </html>
