@@ -1,23 +1,88 @@
-<section style="font-family: sans-serif; color: #003366; background-color: #ffffff; padding: 20px; border: 2px solid #0055ff;">
-  
-  <h1 style="color: #0055ff; border-bottom: 2px solid #0055ff;">🟦 ARCHIVO DE INGENIERÍA: DIAGRAMA DE ABSORCIÓN</h1>
-  
-  <div style="margin-top: 20px;">
-    <h3 style="color: #003366;">01. FASE DE BIO-RECONOCIMIENTO [00:00 - 05:00]</h3>
-    <p style="border-left: 4px solid #0055ff; padding-left: 10px; font-style: italic;">
-      Identificación de nutrientes y liberación de electrolitos.
-    </p>
-    <span style="color: #0055ff; font-weight: bold;">[ESTADO: 🔵 25% CARGADO]</span>
-  </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ART-SANA | BLUE-CORE</title>
+    <style>
+        :root { --blue-deep: #0a192f; --blue-neon: #00d4ff; --blue-tech: #0077b6; --white: #ffffff; }
+        body { background: var(--white); color: var(--blue-deep); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; text-transform: uppercase; }
+        .container { max-width: 500px; margin: auto; padding: 25px; border-left: 5px solid var(--blue-tech); min-height: 100vh; }
+        .header { border-bottom: 2px solid var(--blue-tech); padding-bottom: 10px; margin-bottom: 30px; }
+        .header h1 { font-size: 1.1rem; color: var(--blue-tech); margin: 0; letter-spacing: 1px; }
+        .status-bar { background: #f0f7ff; padding: 10px; font-size: 0.7rem; font-weight: bold; color: var(--blue-tech); margin-bottom: 20px; }
+        
+        .timer-section { text-align: center; margin-bottom: 40px; }
+        .timer-display { font-size: 3rem; font-weight: 300; color: var(--blue-deep); }
+        
+        .phase { margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .phase-title { font-weight: bold; font-size: 0.8rem; color: var(--blue-tech); display: flex; justify-content: space-between; }
+        .phase-desc { font-size: 0.75rem; color: #555; text-transform: none; margin: 8px 0; line-height: 1.4; }
+        .progress-bar { width: 100%; height: 6px; background: #e0e0e0; margin-top: 10px; }
+        .progress-fill { height: 100%; background: var(--blue-neon); box-shadow: 0 0 8px rgba(0,212,255,0.5); }
 
-  <div style="margin-top: 30px; display: flex; gap: 20px;">
-    <button style="background-color: #0055ff; color: white; border: none; padding: 10px 20px; cursor: pointer;">
-      ARQUITECTURA NUTRICIONAL
-    </button>
-    
-    <button disabled style="background-color: #cccccc; color: #666666; border: 1px solid #999999; padding: 10px 20px; cursor: not-allowed;">
-      🔒 RED VITALY (BLOQUEADO)
-    </button>
-  </div>
+        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 40px; }
+        .nav-card { border: 1px solid #ddd; padding: 15px; text-align: center; font-size: 0.65rem; }
+        .nav-card.active { border-color: var(--blue-neon); background: #faffff; }
+        .nav-card.locked { color: #aaa; background: #f9f9f9; cursor: not-allowed; }
 
-</section>
+        .footer-notif { background: var(--blue-deep); color: var(--white); padding: 15px; font-size: 0.65rem; margin-top: 30px; text-align: justify; border-radius: 2px; text-transform: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>SISTEMA ART-SANA [V.2.6]</h1>
+        <div style="font-size: 0.6rem; color: #888;">PROTOCOLO: BLUE-CORE | ESTADO: ÓPTIMO</div>
+    </div>
+
+    <div class="timer-section">
+        <div style="font-size: 0.6rem; letter-spacing: 3px; color: #888;">CRONOLOGÍA DE ACTIVACIÓN</div>
+        <div class="timer-display" id="timer">28:45</div>
+        <div style="font-size: 0.5rem; color: var(--blue-tech);">TIEMPO TOTAL DE CARGA</div>
+    </div>
+
+    <div class="phase">
+        <div class="phase-title"><span>FASE 1: BIO-RECONOCIMIENTO</span><span>25%</span></div>
+        <div class="phase-desc"><b>COMPONENTES:</b> Cítricos + Banana. Detección de bio-catalizadores e inicio de carga de electrolitos.</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 25%;"></div></div>
+    </div>
+
+    <div class="phase">
+        <div class="phase-title"><span>FASE 2: DESPLIEGUE ESTRUCTURAL</span><span>50%</span></div>
+        <div class="phase-desc"><b>COMPONENTES:</b> 7 Seeds Matrix. Estabilización neuronal para el enfoque basal mediante magnesio.</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 50%;"></div></div>
+    </div>
+
+    <div class="nav-grid">
+        <div class="nav-card active">
+            <div style="font-weight: bold; margin-bottom: 5px;">ARQUITECTURA NUTRICIONAL</div>
+            <span>ACCESO LIBRE</span>
+        </div>
+        <div class="nav-card locked">
+            <div style="font-weight: bold; margin-bottom: 5px;">🔒 RED VITALY</div>
+            <span>BIO-ARQUITECTA NIVEL II</span>
+        </div>
+    </div>
+
+    <div class="footer-notif">
+        <b>[NOTIFICACIÓN DEL NÚCLEO]:</b> Configuración Blue-Core aplicada con éxito. El rojo ha sido purgado del sistema para evitar distracciones sensoriales. El organismo opera bajo arquitectura Art-Sana.
+    </div>
+
+    <div style="text-align: center; margin-top: 25px; font-size: 0.7rem; font-weight: bold; color: var(--blue-tech);">
+        ESA ES UNA GOLOSINA. ESTO ES ART-SANA.
+    </div>
+</div>
+
+<script>
+    let t = 28 * 60 + 45;
+    setInterval(() => {
+        if (t > 0) t--;
+        let m = Math.floor(t / 60), s = t % 60;
+        document.getElementById('timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+    }, 1000);
+</script>
+
+</body>
+</html>
