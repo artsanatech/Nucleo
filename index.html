@@ -1,66 +1,58 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ART-SANA | CORE</title>
-    <style>
-        body { background-color: #050505; color: #00f2ff; font-family: 'Courier New', monospace; padding: 20px; text-transform: uppercase; font-size: 0.85rem; }
-        .terminal { border: 1px solid #00f2ff; padding: 15px; box-shadow: 0 0 15px #00f2ff44; max-width: 500px; margin: auto; }
-        .header { color: #ff007a; border-bottom: 1px solid #ff007a; margin-bottom: 15px; font-weight: bold; text-align: center; }
-        .timer { font-size: 2.2rem; text-align: center; margin: 15px 0; color: #fff; text-shadow: 0 0 8px #00f2ff; }
-        .ficha-tecnica { display: none; margin-top: 20px; border-top: 1px dashed #00f2ff; padding-top: 20px; animation: fadeIn 1s; }
-        .product-img { width: 100%; border: 1px solid #333; margin-bottom: 15px; filter: grayscale(50%) contrast(120%); }
-        .stat-row { display: flex; justify-content: space-between; margin-bottom: 5px; border-bottom: 1px solid #1a1a1a; }
-        .btn-mision { width: 100%; padding: 15px; background: transparent; border: 1px solid #ff007a; color: #ff007a; font-weight: bold; margin-top: 20px; cursor: pointer; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
-</head>
-<body>
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#   [SISTEMA ART-SANA FOOD TECH V.2.6]                                    #
+#   IDENTIDAD: CONSUMIDOR DE ALTO RENDIMIENTO                             #
+#   PROTOCOLO: PRECISIÓN / NIVEL 1                                        #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-<div class="terminal">
-    <div id="pantalla-inicio">
-        <div class="header">SISTEMA ART-SANA FOOD TECH [V.2.6]</div>
-        <p>USUARIO: <span style="color:#fff">CONSUMIDOR DE ALTO RENDIMIENTO</span></p>
-        <p>BIENVENIDO AL NÚCLEO. Esta es la arquitectura nutricional diseñada para tu soberanía metabólica.</p>
+# ## 🟢 UNIDAD: POWER GRAIN PRO (EL SET INICIAL)
+### **ESTADO: CALIBRACIÓN INICIAL**
 
-        <div class="timer" id="timer">28:45</div>
-        <p style="text-align: center; font-size: 0.6rem;">TIEMPO PARA ACTIVACIÓN DE NUTRIENTES</p>
+---
 
-        <button class="btn-mision" onclick="activarEscaneo()">[INICIAR ESCANEO DE COMPONENTES ↓]</button>
-    </div>
+## 📊 1. MATRIZ DE RENDIMIENTO (PERFIL TÉCNICO)
 
-    <div id="ficha" class="ficha-tecnica">
-        <div class="header" style="color:#00f2ff; border-color:#00f2ff">UNIDAD: POWER GRAIN PRO</div>
-        
-        <img src="https://via.placeholder.com/400x250/000/00f2ff?text=POWER+GRAIN+PRO+IMAGE" alt="Power Grain Pro" class="product-img">
+| ⚡ ENERGÍA | 🧠 ENFOQUE | 🛠️ RECUPERACIÓN |
+| :--- | :--- | :--- |
+| # **70%** | # **40%** | # **30%** |
+| `[|||||||---]` | `[||||------]` | `[|||-------]` |
+| **FLUJO:** LINEAL | **TIPO:** ESTABLE | **EFECTO:** SOPORTE |
+| Glucosa de liberación lenta | Estabilización basal | Reparación estructural |
 
-        <div class="stat-row"><span>ENERGÍA:</span> <span>70%</span></div>
-        <div class="stat-row"><span>ENFOQUE:</span> <span>40%</span></div>
-        <div class="stat-row"><span>RECUPERACIÓN:</span> <span>30%</span></div>
-        <div class="stat-row"><span>SABOR:</span> <span>TOSTADO / CEREAL</span></div>
-        
-        <p style="margin-top:15px; font-size: 0.7rem; color: #888;">
-            COMPOSICIÓN: 7 SEEDS MATRIX (SOYA, AVENA, CHÍA, MANÍ, SÉSAMO, LINAZA, CALABAZA).
-        </p>
-        
-        <p style="color: #ff007a; font-size: 0.75rem; margin-top: 15px; border: 1px solid #ff007a; padding: 10px;">
-            MISIÓN: No buscamos picos de euforia, buscamos la soberanía de tu metabolismo.
-        </p>
-    </div>
-</div>
+---
 
-<script>
-    // Timer
-    let t = 28 * 60 + 45;
-    setInterval(() => { if (t > 0) { t--; let m = Math.floor(t / 60), s = t % 60; document.getElementById('timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`; } }, 1000);
+## 🔬 2. ESCANEO DE COMPONENTES: ARQUITECTURA NUTRICIONAL
 
-    // Función para mostrar la ficha
-    function activarEscaneo() {
-        document.getElementById('ficha').style.display = 'block';
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
-</script>
+### 🏗️ **NÚCLEO ESTRUCTURAL [SOYA + AVENA]**
+> **ESTADO:** ACTIVO
+> **FUNCIÓN:** Aporta la base de aminoácidos esenciales y fibra beta-glucano. Es el cimiento físico que sostiene el rendimiento a largo plazo.
 
-</body>
-</html>
+### ⛽ **COMBUSTIBLE DE PRECISIÓN [PAPELÓN + BANANA]**
+> **ESTADO:** ACTIVO
+> **FUNCIÓN:** Genera una curva de energía sin picos de insulina. El hierro y el potasio actúan como electrolitos naturales para el sistema muscular.
+
+### 🧬 **7 SEEDS MATRIX [MATRIZ DE SEMILLAS]**
+> **ESTADO:** ACTIVO
+> **FUNCIÓN:** Programación biológica avanzada. El Omega-3, Zinc y Magnesio actúan como "aceite" para la maquinaria metabólica y neuronal.
+
+### 🧪 **BIO-CATALIZADORES [CÍTRICOS + ESPECIAS]**
+> **ESTADO:** ACTIVO
+> **FUNCIÓN:** Optimizadores de biodisponibilidad. Aseguran que el 100% de los nutrientes sean absorbidos y procesados por el organismo.
+
+---
+
+## ⏱️ 3. MÓDULO DE ACTIVACIÓN
+
+### **TIEMPO ESTIMADO PARA ACTIVACIÓN DE NUTRIENTES:** # `28:45 MIN...`
+`[||||||||||||||||||||||||||||||--------------------]` **SISTEMA EN LÍNEA**
+
+---
+
+## 🏗️ 4. ORDEN DE MISIÓN: BIO-ARQUITECTA
+
+> # **"UNA BIO-ARQUITECTA NO DEJA SU ENERGÍA AL AZAR; LA DISEÑA."**
+> 
+> **Misión:** Establecimiento de Homeostasis. 
+> **Objetivo:** Iniciar la desprogramación de aditivos industriales. Utiliza esta unidad como cimiento para tu soberanía metabólica. Has iniciado la construcción de tu versión más eficiente.
+
+---
+**[SISTEMA OPERATIVO ART-SANA: PROYECTO GÉNESIS]**
