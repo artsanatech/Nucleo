@@ -2,124 +2,147 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>ART-SANA CORE</title>
     <style>
         :root { --neon: #00f2ff; --bg: #000000; --white: #ffffff; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        /* Forzamos que el cuerpo ocupe exactamente lo que ves en pantalla */
-        html, body { 
-            background: var(--bg); color: var(--neon); 
+        body { 
+            background: var(--bg); 
+            color: var(--neon);
             font-family: 'Courier New', monospace; 
-            height: 100%; width: 100%; overflow: hidden;
-            text-transform: uppercase;
+            /* Se ha eliminado la restricción de pantalla. Ahora puedes hacer scroll si hace falta. */
         }
 
         .container { 
-            display: flex; flex-direction: column;
-            height: 100vh; width: 100vw;
-            padding: 20px;
+            min-height: 100vh;
+            min-height: 100dvh; /* Altura dinámica para móviles modernos */
+            padding: 25px;
+            padding-bottom: 120px; /* Este espacio en blanco asegura que el botón flotante no tape las barras */
+            display: flex;
+            flex-direction: column;
         }
 
-        .tab { 
-            display: none; flex-direction: column; height: 100%; width: 100%; 
-        }
+        .tab { display: none; flex-direction: column; flex-grow: 1; }
         .active { display: flex; }
 
-        /* SECCIÓN SUPERIOR: DATOS */
-        .top-info { flex: 0 1 auto; }
-        .header { border-left: 6px solid var(--neon); padding-left: 15px; margin-bottom: 10px; }
-        .header h1 { font-size: 2rem; color: var(--white); }
-        .status-text { color: var(--white); font-size: 1rem; line-height: 1.4; }
+        /* CABECERA */
+        .top { margin-bottom: 20px; }
+        .header { border-left: 6px solid var(--neon); padding-left: 15px; margin-bottom: 15px; }
+        .header h1 { font-size: 2.2rem; color: var(--white); text-transform: uppercase; }
+        .status { color: var(--white); font-size: 1rem; line-height: 1.4; text-transform: uppercase; }
 
-        /* SECCIÓN CENTRAL: RELOJ / CONTENIDO (Se expande) */
-        .mid-content { 
-            flex: 1 1 auto; 
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            overflow: hidden;
-        }
+        /* CENTRO */
+        .middle { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        
+        .clock-container { text-align: center; margin-bottom: 30px; }
         .clock { font-size: 5.5rem; color: var(--white); text-shadow: 0 0 20px var(--neon); font-weight: bold; }
-        .bars { width: 100%; margin-top: 20px; }
-        .bar-bg { width: 100%; height: 10px; background: #111; border: 1px solid #333; margin: 5px 0 15px 0; }
-        .bar-fill { height: 100%; background: var(--neon); box-shadow: 0 0 15px var(--neon); }
+        .clock-label { font-size: 0.7rem; color: var(--white); letter-spacing: 4px; margin-top: 5px; text-transform: uppercase; }
 
-        /* PESTAÑA 2: DIAGRAMA COMPACTO */
-        .diagram { width: 100%; display: flex; flex-direction: column; gap: 8px; justify-content: center; height: 100%; }
-        .phase { border-bottom: 1px solid #222; padding-bottom: 5px; }
-        .p-head { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: bold; }
-        .p-act { text-transform: none; font-size: 0.75rem; color: var(--white); margin: 3px 0; }
+        .bars { width: 100%; text-transform: uppercase; }
+        .bar-label { font-size: 0.9rem; color: var(--white); margin-bottom: 5px; display: block; }
+        .bar-bg { width: 100%; height: 12px; background: #111; border: 1px solid #333; margin-bottom: 20px; }
+        .bar-fill { height: 100%; background: var(--neon); box-shadow: 0 0 10px var(--neon); }
 
-        /* PESTAÑA 3: MANIFIESTO CENTRADO */
-        .manifesto { text-align: center; color: var(--white); text-transform: none; font-size: 1.1rem; line-height: 1.4; padding: 10px; }
+        /* PESTAÑA 2 */
+        .phase { border-bottom: 1px solid #222; padding: 15px 0; text-transform: uppercase; }
+        .p-head { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: bold; color: var(--neon); margin-bottom: 8px;}
+        .p-act { font-size: 0.85rem; color: var(--white); text-transform: none; line-height: 1.3; }
 
-        /* SECCIÓN INFERIOR: BOTÓN (Siempre visible) */
-        .bottom-action { flex: 0 0 80px; display: flex; align-items: flex-end; }
+        /* PESTAÑA 3 */
+        .manifesto-container { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .manifesto { color: var(--white); font-size: 1.15rem; line-height: 1.6; text-transform: none; }
+        .slogan { color: var(--neon); font-size: 1.3rem; font-weight: bold; margin-top: 20px; text-transform: uppercase; }
+
+        /* EL BOTÓN FLOTANTE (LA SOLUCIÓN DEFINITIVA) */
+        .fixed-bottom {
+            position: fixed; /* Se pega a la pantalla del móvil */
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 25px 25px 25px; 
+            background: var(--bg); /* Fondo negro para tapar lo que quede por debajo */
+            z-index: 1000; /* Asegura que siempre esté por encima de todo */
+        }
+
         .btn { 
-            width: 100%; height: 60px; background: var(--neon); color: #000; 
-            border: none; font-weight: 900; font-family: 'Courier New';
-            font-size: 1rem; cursor: pointer; letter-spacing: 1px;
+            width: 100%; height: 65px; background: var(--neon); color: #000; 
+            border: none; font-weight: 900; font-family: 'Courier New', monospace;
+            font-size: 1.1rem; text-transform: uppercase; cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
         }
     </style>
 </head>
 <body>
 
 <div class="container">
+    
     <div id="p1" class="tab active">
-        <div class="top-info">
+        <div class="top">
             <div class="header"><h1>ART-SANA</h1></div>
-            <div class="status-text">UNIDAD: POWER GRAIN PRO<br>ESTADO: METABOLIZANDO...</div>
+            <div class="status">UNIDAD: POWER GRAIN PRO<br>ESTADO: METABOLIZANDO...</div>
         </div>
-        <div class="mid-content">
-            <div class="clock" id="timer">28:45</div>
-            <div style="font-size:0.6rem; letter-spacing:3px; color:var(--white);">ABSORCIÓN ESTIMADA</div>
+        <div class="middle">
+            <div class="clock-container">
+                <div class="clock" id="timer">28:45</div>
+                <div class="clock-label">ABSORCIÓN ESTIMADA</div>
+            </div>
             <div class="bars">
-                <div style="font-size:0.8rem;">ENERGÍA 70%</div>
+                <span class="bar-label">ENERGÍA 70%</span>
                 <div class="bar-bg"><div class="bar-fill" style="width:70%"></div></div>
-                <div style="font-size:0.8rem;">ENFOQUE 40%</div>
+                <span class="bar-label">ENFOQUE 40%</span>
                 <div class="bar-bg"><div class="bar-fill" style="width:40%"></div></div>
             </div>
         </div>
-        <div class="bottom-action">
+        <div class="fixed-bottom" id="btn1">
             <button class="btn" onclick="go(2)">ARQUITECTURA NUTRICIONAL</button>
         </div>
     </div>
 
     <div id="p2" class="tab">
-        <div class="top-info"><div class="header"><h1>ABSORCIÓN</h1></div></div>
-        <div class="mid-content">
-            <div class="diagram">
-                <div class="phase"><div class="p-head"><span>F1: BIO-RECONOCIMIENTO</span><span>25%</span></div><p class="p-act">DETECCIÓN DE CATALIZADORES.</p></div>
-                <div class="phase"><div class="p-head"><span>F2: DESPLIEGUE</span><span>50%</span></div><p class="p-act">7 SEEDS MATRIX EN FLUJO.</p></div>
-                <div class="phase"><div class="p-head"><span>F3: SINTONÍA</span><span>75%</span></div><p class="p-act">INTEGRACIÓN DE AMINOÁCIDOS.</p></div>
-                <div class="phase"><div class="p-head"><span>F4: SISTEMA EN LÍNEA</span><span>100%</span></div><p class="p-act">HOMEOSTASIS COMPLETADA.</p></div>
-            </div>
+        <div class="top"><div class="header"><h1>ABSORCIÓN</h1></div></div>
+        <div class="middle">
+            <div class="phase"><div class="p-head"><span>F1: BIO-RECONOCIMIENTO</span><span>25%</span></div><div class="p-act">DETECCIÓN DE CATALIZADORES. INICIO DE CARGA.</div></div>
+            <div class="phase"><div class="p-head"><span>F2: DESPLIEGUE</span><span>50%</span></div><div class="p-act">7 SEEDS MATRIX EN FLUJO. ESTABILIZACIÓN.</div></div>
+            <div class="phase"><div class="p-head"><span>F3: SINTONÍA</span><span>75%</span></div><div class="p-act">INTEGRACIÓN DE AMINOÁCIDOS. SELLO DE FLUJO.</div></div>
+            <div class="phase"><div class="p-head"><span>F4: SISTEMA EN LÍNEA</span><span>100%</span></div><div class="p-act">HOMEOSTASIS COMPLETADA. OPERANDO BAJO ART-SANA.</div></div>
         </div>
-        <div class="bottom-action">
+        <div class="fixed-bottom" id="btn2" style="display:none;">
             <button class="btn" onclick="go(3)">VER MANIFIESTO</button>
         </div>
     </div>
 
     <div id="p3" class="tab">
-        <div class="top-info"><div class="header"><h1>OBJETIVO</h1></div></div>
-        <div class="mid-content">
+        <div class="top"><div class="header"><h1>OBJETIVO</h1></div></div>
+        <div class="manifesto-container">
             <div class="manifesto">
                 "Nos distanciamos de lo químico porque el cuerpo exige arquitectura real. Usamos lo natural y local para recuperar tu soberanía."
-                <br><br>
-                <b style="color:var(--neon); font-size:1.2rem;">SOMOS ART-SANA,<br>LO DEMÁS SON GOLOSINAS.</b>
             </div>
+            <div class="slogan">SOMOS ART-SANA,<br>LO DEMÁS SON GOLOSINAS.</div>
         </div>
-        <div class="bottom-action">
-            <button class="btn" style="background:#111; color:var(--neon); border:1px solid var(--neon);" onclick="go(1)">REINICIAR</button>
+        <div class="fixed-bottom" id="btn3" style="display:none;">
+            <button class="btn" style="background:#111; color:var(--neon); border:1px solid var(--neon);" onclick="go(1)">REINICIAR SISTEMA</button>
         </div>
     </div>
+
 </div>
 
 <script>
     function go(n) {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        // Ocultar todas las pestañas y botones
+        for(let i=1; i<=3; i++) {
+            document.getElementById('p'+i).classList.remove('active');
+            document.getElementById('btn'+i).style.display = 'none';
+        }
+        
+        // Mostrar la pestaña y botón seleccionados
         document.getElementById('p'+n).classList.add('active');
+        document.getElementById('btn'+n).style.display = 'block';
+        
+        window.scrollTo(0,0);
     }
+
     let s = 1725;
     setInterval(() => {
         if(s>0) s--;
@@ -128,4 +151,4 @@
     }, 1000);
 </script>
 </body>
-</html>
+    </html>
