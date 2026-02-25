@@ -7,55 +7,61 @@
     <style>
         :root { 
             --neon-blue: #00f2ff; 
-            --deep-blue: #0a192f;
             --bg-black: #050505;
-            --gray-text: #888;
+            --gray-text: #aaa;
         }
         body { 
             background: var(--bg-black); color: var(--neon-blue); 
             font-family: 'Courier New', monospace; margin: 0; padding: 0; 
-            text-transform: uppercase; overflow: hidden; /* Evita scroll en Tab 1 */
+            text-transform: uppercase; font-size: 1.2rem; /* Aumento del 20% base */
         }
-        .container { max-width: 450px; margin: auto; height: 100vh; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
+        .container { 
+            max-width: 500px; margin: auto; height: 100vh; 
+            display: flex; flex-direction: column; padding: 30px; box-sizing: border-box; 
+        }
         
         /* Gestión de Pestañas */
-        .tab { display: none; height: 100%; flex-direction: column; animation: fadeIn 0.4s ease; }
+        .tab { display: none; height: 100%; flex-direction: column; }
         .tab.active { display: flex; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* PESTAÑA 1: HOME (ESTILO ORIGINAL DARK) */
-        .header-box { border-left: 4px solid var(--neon-blue); padding-left: 15px; margin-bottom: 20px; }
-        .header-box h1 { font-size: 1.5rem; margin: 0; letter-spacing: 2px; color: #fff; }
-        .unit-data { font-size: 0.75rem; margin-bottom: 15px; }
-        .unit-data div { margin-bottom: 4px; }
-        .timer-display { font-size: 4rem; text-align: center; margin: 10px 0; color: #fff; text-shadow: 0 0 15px var(--neon-blue); }
+        /* PESTAÑA 1: HOME */
+        .header-box { border-left: 6px solid var(--neon-blue); padding-left: 20px; margin-bottom: 30px; }
+        .header-box h1 { font-size: 2.2rem; margin: 0; letter-spacing: 3px; color: #fff; }
         
-        .stats-block { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
-        .bar-row { margin-bottom: 15px; }
-        .bar-meta { display: flex; justify-content: space-between; font-size: 0.7rem; margin-bottom: 5px; }
-        .bar-bg { width: 100%; height: 6px; background: #111; border: 1px solid #222; }
-        .bar-fill { height: 100%; background: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue); }
+        .unit-data { font-size: 1rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        /* Reloj Centrado */
+        .timer-section { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .timer-display { font-size: 5.5rem; color: #fff; text-shadow: 0 0 20px var(--neon-blue); font-weight: bold; }
+        .timer-label { font-size: 0.7rem; color: var(--gray-text); letter-spacing: 5px; margin-top: 10px; }
+
+        /* Barras */
+        .stats-block { margin-bottom: 30px; }
+        .bar-row { margin-bottom: 20px; }
+        .bar-meta { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; }
+        .bar-bg { width: 100%; height: 10px; background: #111; border: 1px solid #333; }
+        .bar-fill { height: 100%; background: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue); }
 
         /* PESTAÑA 2: DIAGRAMA */
-        .scroll-area { overflow-y: auto; flex-grow: 1; padding-right: 5px; }
-        .phase-item { border-left: 2px solid var(--neon-blue); padding-left: 15px; margin-bottom: 20px; }
-        .phase-item h3 { font-size: 0.8rem; margin: 0; color: #fff; }
-        .phase-item p { font-size: 0.7rem; text-transform: none; color: var(--gray-text); margin: 5px 0; }
+        .scroll-area { overflow-y: auto; flex-grow: 1; margin-bottom: 20px; }
+        .phase-item { border-left: 3px solid var(--neon-blue); padding-left: 20px; margin-bottom: 30px; }
+        .phase-item h3 { font-size: 1.1rem; margin: 0; color: #fff; }
+        .phase-item p { font-size: 0.9rem; text-transform: none; color: var(--gray-text); margin-top: 10px; line-height: 1.4; }
 
         /* PESTAÑA 3: HISTORIA */
-        .story-box { text-transform: none; font-size: 0.85rem; line-height: 1.5; color: #ccc; text-align: justify; }
+        .story-box { text-transform: none; font-size: 1.1rem; line-height: 1.6; color: #eee; text-align: justify; flex-grow: 1; overflow-y: auto; }
         .story-box b { color: var(--neon-blue); }
 
         /* Botones */
         .nav-btn { 
-            background: transparent; border: 1px solid var(--neon-blue); color: var(--neon-blue); 
-            padding: 18px; font-weight: bold; cursor: pointer; margin-top: 10px;
-            font-family: 'Courier New', monospace; font-size: 0.8rem;
+            background: transparent; border: 2px solid var(--neon-blue); color: var(--neon-blue); 
+            padding: 25px; font-weight: bold; cursor: pointer; 
+            font-family: 'Courier New', monospace; font-size: 1rem; width: 100%;
         }
-        .nav-btn:hover { background: rgba(0, 242, 255, 0.1); }
-        .locked-btn { border-color: #333; color: #444; cursor: not-allowed; margin-top: 10px; padding: 15px; text-align: center; font-size: 0.7rem; }
-
-        .footer-tag { text-align: center; font-size: 0.7rem; margin-top: 20px; color: var(--neon-blue); }
+        .nav-btn:active { background: var(--neon-blue); color: #000; }
+        
+        .locked-btn { border: 2px solid #333; color: #444; padding: 20px; text-align: center; font-size: 0.9rem; margin-top: 20px; }
+        .footer-tag { text-align: center; font-size: 1rem; margin: 25px 0; color: var(--neon-blue); font-weight: bold; }
     </style>
 </head>
 <body>
@@ -65,7 +71,7 @@
     <div id="tab1" class="tab active">
         <div class="header-box">
             <h1>ART-SANA</h1>
-            <div style="font-size: 0.6rem; color: var(--neon-blue);">SISTEMA DE INGENIERÍA V.2.6</div>
+            <div style="font-size: 0.8rem;">SISTEMA DE INGENIERÍA V.2.6</div>
         </div>
 
         <div class="unit-data">
@@ -73,8 +79,10 @@
             <div>ESTADO: METABOLIZANDO...</div>
         </div>
 
-        <div class="timer-display" id="timer1">28:45</div>
-        <div style="text-align:center; font-size:0.5rem; color:var(--gray-text); letter-spacing:3px;">ABSORCIÓN ESTIMADA</div>
+        <div class="timer-section">
+            <div class="timer-display" id="time1">28:45</div>
+            <div class="timer-label">ABSORCIÓN ESTIMADA</div>
+        </div>
 
         <div class="stats-block">
             <div class="bar-row">
@@ -87,65 +95,71 @@
             </div>
         </div>
 
-        <button class="nav-btn" onclick="showTab('tab2')">
-            > ARQUITECTURA NUTRICIONAL [ACCESO LIBRE]
+        <button class="nav-btn" onclick="openTab('tab2')">
+            > ARQUITECTURA NUTRICIONAL
         </button>
     </div>
 
     <div id="tab2" class="tab">
-        <div class="header-box"><h1>DIAGRAMA DE ABSORCIÓN</h1></div>
+        <div class="header-box"><h1>ABSORCIÓN</h1></div>
         <div class="scroll-area">
             <div class="phase-item">
-                <h3>FASE 1: BIO-RECONOCIMIENTO [25%]</h3>
-                <p>El sistema detecta bio-catalizadores. Inicio de carga de electrolitos (Potasio) y glucosa inicial.</p>
+                <h3>FASE 1: BIO-RECONOCIMIENTO</h3>
+                <p>El sistema detecta bio-catalizadores. Inicio de carga de electrolitos y glucosa inicial.</p>
             </div>
             <div class="phase-item">
-                <h3>FASE 2: DESPLIEGUE ESTRUCTURAL [50%]</h3>
-                <p>7 Seeds Matrix en flujo. El magnesio inicia la estabilización neuronal para el enfoque basal.</p>
+                <h3>FASE 2: DESPLIEGUE ESTRUCTURAL</h3>
+                <p>7 Seeds Matrix en flujo. El magnesio inicia la estabilización neuronal.</p>
             </div>
             <div class="phase-item">
-                <h3>FASE 3: SINTONÍA DE ENERGÍA [75%]</h3>
-                <p>Integración de aminoácidos y carbohidratos complejos. La fibra beta-glucano sella el flujo lineal.</p>
+                <h3>FASE 3: SINTONÍA DE ENERGÍA</h3>
+                <p>Integración de aminoácidos y carbohidratos. La fibra sella el flujo lineal.</p>
             </div>
             <div class="phase-item">
-                <h3>FASE 4: SISTEMA EN LÍNEA [100%]</h3>
-                <p>Homeostasis completada. El organismo opera bajo arquitectura Art-Sana. Desprogramación industrial activa.</p>
+                <h3>FASE 4: SISTEMA EN LÍNEA</h3>
+                <p>Homeostasis completada. Operando bajo arquitectura Art-Sana.</p>
             </div>
         </div>
-        <button class="nav-btn" onclick="showTab('tab3')">> CONTINUAR AL MANIFIESTO</button>
+        <button class="nav-btn" onclick="openTab('tab3')">> MANIFIESTO</button>
     </div>
 
-    <div id="tab3" class="tab" style="overflow-y: auto;">
-        <div class="header-box"><h1>NUESTRO OBJETIVO</h1></div>
+    <div id="tab3" class="tab">
+        <div class="header-box"><h1>OBJETIVO</h1></div>
         <div class="story-box">
-            En <b>Art-Sana</b> no buscamos imitar a la industria; buscamos <b>desprogramarla</b>. Nos distanciamos de lo químico porque el cuerpo humano no es un depósito de aditivos sintéticos, sino una estructura que exige <b>arquitectura real</b>.<br><br>
-            Creemos en el poder de lo <b>natural y local</b>. Utilizamos ingredientes de nuestra tierra procesados con ingeniería para que tu metabolismo recupere su soberanía.
+            En <b>Art-Sana</b> buscamos <b>desprogramar</b> la industria. Nos distanciamos de lo químico porque el cuerpo exige <b>arquitectura real</b>.<br><br>
+            Creemos en el poder de lo <b>natural y local</b>. Procesamos ingredientes de nuestra tierra con ingeniería para que tu metabolismo recupere su soberanía.
         </div>
 
         <div class="footer-tag">SOMOS ART-SANA, LO DEMÁS SON GOLOSINAS.</div>
         
         <div class="locked-btn">
-            🔒 RED VITALY: BLOQUEADA<br>
-            <span style="font-size: 0.5rem;">[ REQUIERE NIVEL DE BIO-ARQUITECTA II ]</span>
+            🔒 RED VITALY: BLOQUEADA
         </div>
 
-        <button class="nav-btn" style="border-color:#555; color:#555; margin-top:20px;" onclick="showTab('tab1')">REINICIAR PANEL</button>
+        <button class="nav-btn" style="border-color:#444; color:#444; margin-top:15px;" onclick="openTab('tab1')">REINICIAR</button>
     </div>
 
 </div>
 
 <script>
-    function showTab(tabId) {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
+    function openTab(tabId) {
+        // Oculta todas las pestañas
+        var tabs = document.getElementsByClassName("tab");
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].style.display = "none";
+        }
+        // Muestra la seleccionada
+        document.getElementById(tabId).style.display = "flex";
+        window.scrollTo(0,0);
     }
 
+    // Timer Funcionando
     let t = 28 * 60 + 45;
     setInterval(() => {
         if (t > 0) t--;
         let m = Math.floor(t / 60), s = t % 60;
-        let timeStr = `${m}:${s < 10 ? '0' : ''}${s}`;
-        document.getElementById('timer1').innerText = timeStr;
+        let display = `${m}:${s < 10 ? '0' : ''}${s}`;
+        document.getElementById('time1').innerText = display;
     }, 1000);
 </script>
 
