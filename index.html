@@ -5,28 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ART-SANA | BLUE-CORE</title>
     <style>
-        :root { --blue-deep: #0a192f; --blue-neon: #00d4ff; --blue-tech: #0077b6; --white: #ffffff; }
-        body { background: var(--white); color: var(--blue-deep); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; text-transform: uppercase; }
-        .container { max-width: 500px; margin: auto; padding: 25px; border-left: 5px solid var(--blue-tech); min-height: 100vh; }
-        .header { border-bottom: 2px solid var(--blue-tech); padding-bottom: 10px; margin-bottom: 30px; }
-        .header h1 { font-size: 1.1rem; color: var(--blue-tech); margin: 0; letter-spacing: 1px; }
-        .status-bar { background: #f0f7ff; padding: 10px; font-size: 0.7rem; font-weight: bold; color: var(--blue-tech); margin-bottom: 20px; }
+        :root { --blue-deep: #0a192f; --blue-neon: #00d4ff; --blue-tech: #0077b6; --white: #ffffff; --gray-soft: #f4f7f9; }
+        body { background: var(--white); color: var(--blue-deep); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; text-transform: uppercase; }
+        .container { max-width: 450px; margin: auto; padding: 20px; border-left: 4px solid var(--blue-tech); }
+        .header { border-bottom: 2px solid var(--blue-tech); padding-bottom: 8px; margin-bottom: 25px; }
+        .header h1 { font-size: 1rem; color: var(--blue-tech); margin: 0; }
+        .timer-section { text-align: center; margin-bottom: 30px; background: var(--gray-soft); padding: 15px; }
+        .timer-display { font-size: 2.8rem; font-weight: 300; color: var(--blue-deep); letter-spacing: -1px; }
         
-        .timer-section { text-align: center; margin-bottom: 40px; }
-        .timer-display { font-size: 3rem; font-weight: 300; color: var(--blue-deep); }
-        
-        .phase { margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        .phase-title { font-weight: bold; font-size: 0.8rem; color: var(--blue-tech); display: flex; justify-content: space-between; }
-        .phase-desc { font-size: 0.75rem; color: #555; text-transform: none; margin: 8px 0; line-height: 1.4; }
-        .progress-bar { width: 100%; height: 6px; background: #e0e0e0; margin-top: 10px; }
-        .progress-fill { height: 100%; background: var(--blue-neon); box-shadow: 0 0 8px rgba(0,212,255,0.5); }
+        /* Fases de Absorción */
+        .phase { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        .phase-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.7rem; color: var(--blue-tech); }
+        .phase-desc { font-size: 0.65rem; color: #444; text-transform: none; margin: 5px 0; line-height: 1.3; }
+        .bar-bg { width: 100%; height: 5px; background: #e0e0e0; margin-top: 8px; position: relative; }
+        .bar-fill { height: 100%; background: var(--blue-neon); box-shadow: 0 0 10px rgba(0,212,255,0.4); }
 
-        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 40px; }
-        .nav-card { border: 1px solid #ddd; padding: 15px; text-align: center; font-size: 0.65rem; }
-        .nav-card.active { border-color: var(--blue-neon); background: #faffff; }
-        .nav-card.locked { color: #aaa; background: #f9f9f9; cursor: not-allowed; }
+        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 30px; }
+        .nav-card { border: 1px solid #ddd; padding: 12px; text-align: center; font-size: 0.6rem; }
+        .nav-card.active { border-color: var(--blue-neon); background: #f0fbff; font-weight: bold; }
+        .nav-card.locked { color: #aaa; background: #fafafa; }
 
-        .footer-notif { background: var(--blue-deep); color: var(--white); padding: 15px; font-size: 0.65rem; margin-top: 30px; text-align: justify; border-radius: 2px; text-transform: none; }
+        .notif { background: var(--blue-deep); color: white; padding: 12px; font-size: 0.6rem; margin-top: 25px; border-radius: 2px; text-transform: none; line-height: 1.4; }
+        .slogan { text-align: center; margin-top: 20px; font-size: 0.75rem; font-weight: bold; color: var(--blue-tech); }
     </style>
 </head>
 <body>
@@ -34,45 +34,48 @@
 <div class="container">
     <div class="header">
         <h1>SISTEMA ART-SANA [V.2.6]</h1>
-        <div style="font-size: 0.6rem; color: #888;">PROTOCOLO: BLUE-CORE | ESTADO: ÓPTIMO</div>
+        <div style="font-size: 0.55rem; color: #888;">DIAGRAMA DE ABSORCIÓN | BLUE-CORE</div>
     </div>
 
     <div class="timer-section">
-        <div style="font-size: 0.6rem; letter-spacing: 3px; color: #888;">CRONOLOGÍA DE ACTIVACIÓN</div>
         <div class="timer-display" id="timer">28:45</div>
-        <div style="font-size: 0.5rem; color: var(--blue-tech);">TIEMPO TOTAL DE CARGA</div>
+        <div style="font-size: 0.5rem; color: var(--blue-tech); letter-spacing: 2px;">ACTIVACIÓN DE NUTRIENTES</div>
     </div>
 
     <div class="phase">
-        <div class="phase-title"><span>FASE 1: BIO-RECONOCIMIENTO</span><span>25%</span></div>
-        <div class="phase-desc"><b>COMPONENTES:</b> Cítricos + Banana. Detección de bio-catalizadores e inicio de carga de electrolitos.</div>
-        <div class="progress-bar"><div class="progress-fill" style="width: 25%;"></div></div>
+        <div class="phase-header"><span>FASE 1: BIO-RECONOCIMIENTO</span><span>25%</span></div>
+        <div class="phase-desc"><b>ACCIIÓN:</b> El sistema detecta bio-catalizadores (Cítricos/Banana). Inicio de carga de electrolitos.</div>
+        <div class="bar-bg"><div class="bar-fill" style="width: 25%;"></div></div>
     </div>
 
     <div class="phase">
-        <div class="phase-title"><span>FASE 2: DESPLIEGUE ESTRUCTURAL</span><span>50%</span></div>
-        <div class="phase-desc"><b>COMPONENTES:</b> 7 Seeds Matrix. Estabilización neuronal para el enfoque basal mediante magnesio.</div>
-        <div class="progress-bar"><div class="progress-fill" style="width: 50%;"></div></div>
+        <div class="phase-header"><span>FASE 2: DESPLIEGUE ESTRUCTURAL</span><span>50%</span></div>
+        <div class="phase-desc"><b>ACCIÓN:</b> 7 Seeds Matrix en proceso. El magnesio inicia la estabilización neuronal para el enfoque.</div>
+        <div class="bar-bg"><div class="bar-fill" style="width: 50%;"></div></div>
+    </div>
+
+    <div class="phase">
+        <div class="phase-header"><span>FASE 3: SINTONÍA DE ENERGÍA</span><span>75%</span></div>
+        <div class="phase-desc"><b>ACCIÓN:</b> Integración de aminoácidos (Soya/Avena). La fibra sella el flujo lineal de energía.</div>
+        <div class="bar-bg"><div class="bar-fill" style="width: 75%;"></div></div>
+    </div>
+
+    <div class="phase">
+        <div class="phase-header"><span>FASE 4: SISTEMA EN LÍNEA</span><span>100%</span></div>
+        <div class="phase-desc"><b>ACCIÓN:</b> Homeostasis completada. Desprogramación industrial activa. Operando bajo Art-Sana.</div>
+        <div class="bar-bg"><div class="bar-fill" style="width: 100%;"></div></div>
     </div>
 
     <div class="nav-grid">
-        <div class="nav-card active">
-            <div style="font-weight: bold; margin-bottom: 5px;">ARQUITECTURA NUTRICIONAL</div>
-            <span>ACCESO LIBRE</span>
-        </div>
-        <div class="nav-card locked">
-            <div style="font-weight: bold; margin-bottom: 5px;">🔒 RED VITALY</div>
-            <span>BIO-ARQUITECTA NIVEL II</span>
-        </div>
+        <div class="nav-card active">ARQUITECTURA NUTRICIONAL<br><span style="font-size: 0.5rem;">[ACCESO LIBRE]</span></div>
+        <div class="nav-card locked">🔒 RED VITALY<br><span style="font-size: 0.5rem;">[NIVEL II REQUERIDO]</span></div>
     </div>
 
-    <div class="footer-notif">
-        <b>[NOTIFICACIÓN DEL NÚCLEO]:</b> Configuración Blue-Core aplicada con éxito. El rojo ha sido purgado del sistema para evitar distracciones sensoriales. El organismo opera bajo arquitectura Art-Sana.
+    <div class="notif">
+        <b>NOTIFICACIÓN:</b> Configuración Blue-Core aplicada. Se ha purgado el rojo para optimizar la lectura técnica. El sistema ha sido diseñado para romper el ciclo de las golosinas industriales.
     </div>
 
-    <div style="text-align: center; margin-top: 25px; font-size: 0.7rem; font-weight: bold; color: var(--blue-tech);">
-        ESA ES UNA GOLOSINA. ESTO ES ART-SANA.
-    </div>
+    <div class="slogan">ESA ES UNA GOLOSINA. ESTO ES ART-SANA.</div>
 </div>
 
 <script>
