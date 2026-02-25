@@ -12,14 +12,13 @@
             background: var(--bg); 
             color: var(--neon);
             font-family: 'Courier New', monospace; 
-            /* Se ha eliminado la restricción de pantalla. Ahora puedes hacer scroll si hace falta. */
         }
 
         .container { 
             min-height: 100vh;
-            min-height: 100dvh; /* Altura dinámica para móviles modernos */
+            min-height: 100dvh; 
             padding: 25px;
-            padding-bottom: 120px; /* Este espacio en blanco asegura que el botón flotante no tape las barras */
+            padding-bottom: 120px; /* Espacio para el botón flotante */
             display: flex;
             flex-direction: column;
         }
@@ -53,17 +52,27 @@
         /* PESTAÑA 3 */
         .manifesto-container { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .manifesto { color: var(--white); font-size: 1.15rem; line-height: 1.6; text-transform: none; }
-        .slogan { color: var(--neon); font-size: 1.3rem; font-weight: bold; margin-top: 20px; text-transform: uppercase; }
+        .slogan { color: var(--neon); font-size: 1.3rem; font-weight: bold; margin-top: 20px; margin-bottom: 30px; text-transform: uppercase; }
 
-        /* EL BOTÓN FLOTANTE (LA SOLUCIÓN DEFINITIVA) */
-        .fixed-bottom {
-            position: fixed; /* Se pega a la pantalla del móvil */
-            bottom: 0;
-            left: 0;
+        /* BOTÓN BLOQUEADO RED VITALY */
+        .locked-btn {
             width: 100%;
+            border: 1px dashed #444;
+            background: transparent;
+            color: #555;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* EL BOTÓN FLOTANTE */
+        .fixed-bottom {
+            position: fixed; 
+            bottom: 0; left: 0; width: 100%;
             padding: 15px 25px 25px 25px; 
-            background: var(--bg); /* Fondo negro para tapar lo que quede por debajo */
-            z-index: 1000; /* Asegura que siempre esté por encima de todo */
+            background: var(--bg); 
+            z-index: 1000; 
         }
 
         .btn { 
@@ -120,7 +129,13 @@
                 "Nos distanciamos de lo químico porque el cuerpo exige arquitectura real. Usamos lo natural y local para recuperar tu soberanía."
             </div>
             <div class="slogan">SOMOS ART-SANA,<br>LO DEMÁS SON GOLOSINAS.</div>
+            
+            <div class="locked-btn">
+                🔒 RED VITALY [ACCESO DENEGADO]<br>
+                <span style="font-size: 0.65rem; color: #444; margin-top: 5px; display: block; letter-spacing: 1px;">REQUIERE RANGO: BIO-ARQUITECTA</span>
+            </div>
         </div>
+
         <div class="fixed-bottom" id="btn3" style="display:none;">
             <button class="btn" style="background:#111; color:var(--neon); border:1px solid var(--neon);" onclick="go(1)">REINICIAR SISTEMA</button>
         </div>
@@ -130,16 +145,12 @@
 
 <script>
     function go(n) {
-        // Ocultar todas las pestañas y botones
         for(let i=1; i<=3; i++) {
             document.getElementById('p'+i).classList.remove('active');
             document.getElementById('btn'+i).style.display = 'none';
         }
-        
-        // Mostrar la pestaña y botón seleccionados
         document.getElementById('p'+n).classList.add('active');
         document.getElementById('btn'+n).style.display = 'block';
-        
         window.scrollTo(0,0);
     }
 
@@ -151,4 +162,4 @@
     }, 1000);
 </script>
 </body>
-    </html>
+</html>
