@@ -7,10 +7,9 @@
     <style>
         :root { --neon: #00f2ff; --bg: #000000; --white: #ffffff; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
         body { background: var(--bg); color: var(--neon); font-family: 'Courier New', monospace; overflow: hidden; }
 
-        /* PANTALLA DE ESCANEO (SPLASH) - VELOCIDAD AJUSTADA */
+        /* PANTALLA DE ESCANEO */
         #scanner-screen {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: var(--bg); z-index: 5000; display: flex; flex-direction: column;
@@ -18,121 +17,131 @@
         }
         .scan-line {
             position: absolute; width: 100%; height: 4px; background: var(--neon);
-            box-shadow: 0 0 25px var(--neon); top: 0; 
-            animation: scanMove 4s ease-in-out infinite; /* De 3s a 4s para más suavidad */
+            box-shadow: 0 0 25px var(--neon); top: 0; animation: scanMove 4s ease-in-out infinite;
         }
         @keyframes scanMove { 0% { top: 0%; } 50% { top: 100%; } 100% { top: 0%; } }
         
-        .scan-text { font-size: 0.9rem; color: var(--white); margin-top: 20px; letter-spacing: 2px; line-height: 1.5; }
-        .matrix-data { font-size: 0.8rem; color: var(--neon); opacity: 0.8; margin-top: 15px; height: 1.5rem; font-weight: bold; }
+        .scan-text { font-size: 0.9rem; color: var(--white); margin-top: 20px; letter-spacing: 2px; }
+        .matrix-data { font-size: 0.8rem; color: var(--neon); margin-top: 15px; height: 1.5rem; font-weight: bold; }
+        .tap-to-start { font-size: 0.6rem; color: #444; margin-top: 40px; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        /* CONTENEDOR PRINCIPAL */
+        /* INTERFAZ PRINCIPAL */
         .container { display: none; min-height: 100vh; padding: 25px; padding-bottom: 120px; flex-direction: column; }
-
-        /* ESTILOS DE INTERFAZ */
         .tab { display: none; flex-direction: column; flex-grow: 1; }
         .active { display: flex; }
         .header { border-left: 6px solid var(--neon); padding-left: 15px; margin-bottom: 15px; }
         .header h1 { font-size: 2.2rem; color: var(--white); text-transform: uppercase; }
-        .status { color: var(--white); font-size: 1rem; line-height: 1.4; text-transform: uppercase; }
-        .clock-container { text-align: center; margin: 40px 0; }
-        .clock { font-size: 5.5rem; color: var(--white); text-shadow: 0 0 20px var(--neon); font-weight: bold; }
-        .bars { width: 100%; text-transform: uppercase; }
-        .bar-bg { width: 100%; height: 12px; background: #111; border: 1px solid #333; margin-bottom: 20px; }
+        .status { color: var(--white); font-size: 1rem; text-transform: uppercase; }
+        
+        /* PESTAÑA 2: DIAGRAMA SEGÚN REFERENCIA */
+        .phase-row { margin-bottom: 25px; }
+        .p-info { display: flex; justify-content: space-between; font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; }
+        .p-action { color: var(--white); font-size: 0.8rem; text-transform: none; margin-bottom: 8px; line-height: 1.2; }
+        .bar-bg { width: 100%; height: 12px; background: #111; border: 1px solid #333; }
         .bar-fill { height: 100%; background: var(--neon); box-shadow: 0 0 10px var(--neon); }
+
         .fixed-bottom { position: fixed; bottom: 0; left: 0; width: 100%; padding: 15px 25px 25px 25px; background: var(--bg); z-index: 1000; }
         .btn { width: 100%; height: 65px; background: var(--neon); color: #000; border: none; font-weight: 900; font-family: 'Courier New'; font-size: 1.1rem; text-transform: uppercase; cursor: pointer; }
-        
-        .manifesto-container { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .manifesto { color: var(--white); font-size: 1.15rem; line-height: 1.6; text-transform: none; }
-        .locked-btn { width: 100%; border: 1px dashed #444; background: transparent; color: #555; padding: 15px; text-align: center; font-size: 0.8rem; text-transform: uppercase; margin-top: 20px; }
     </style>
 </head>
-<body>
+<body onclick="initSystem()">
 
 <div id="scanner-screen">
     <div class="scan-line"></div>
     <div class="scan-text">SISTEMA ART-SANA FOOD TECH [V.2.6]<br>INICIANDO ESCANEO DE COMPONENTES...</div>
-    <div class="matrix-data" id="matrix-text">CONECTANDO CON 7 SEEDS MATRIX...</div>
+    <div class="matrix-data" id="matrix-text">ESPERANDO INTERACCIÓN...</div>
+    <div class="tap-to-start" id="tap-msg">[ TOCA LA PANTALLA PARA ESCANEAR ]</div>
 </div>
 
 <div class="container" id="main-ui">
     <div id="p1" class="tab active">
-        <div class="top">
-            <div class="header"><h1>ART-SANA</h1></div>
-            <div class="status">UNIDAD: POWER GRAIN PRO<br>ESTADO: METABOLIZANDO...</div>
-        </div>
-        <div class="middle">
-            <div class="clock-container">
-                <div class="clock" id="timer">28:45</div>
-                <div style="font-size: 0.7rem; color: var(--white); letter-spacing: 4px;">TIEMPO PARA ACTIVACIÓN</div>
-            </div>
-            <div class="bars">
-                <span style="color:white; font-size:0.9rem">ENERGÍA 70%</span>
-                <div class="bar-bg"><div class="bar-fill" style="width:70%"></div></div>
-                <span style="color:white; font-size:0.9rem">ENFOQUE 40%</span>
-                <div class="bar-bg"><div class="bar-fill" style="width:40%"></div></div>
-            </div>
+        <div class="header"><h1>ART-SANA</h1></div>
+        <div class="status">UNIDAD: POWER GRAIN PRO<br>ESTADO: METABOLIZANDO...</div>
+        <div style="flex-grow:1; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+             <div style="font-size: 5.5rem; color: white; font-weight: bold;" id="timer">28:45</div>
+             <div style="font-size: 0.7rem; letter-spacing: 4px;">TIEMPO PARA ACTIVACIÓN</div>
         </div>
         <div class="fixed-bottom" id="btn1"><button class="btn" onclick="go(2)">ARQUITECTURA NUTRICIONAL</button></div>
     </div>
 
     <div id="p2" class="tab">
-        <div class="top"><div class="header"><h1>ABSORCIÓN</h1></div></div>
-        <div style="margin-top:20px;">
-            <div style="border-bottom: 1px solid #222; padding: 15px 0;"><span style="color:var(--neon)">F1: BIO-RECONOCIMIENTO</span><p style="color:white; font-size:0.85rem; text-transform:none; margin-top:5px;">Detección de bio-catalizadores. Inicio de carga.</p></div>
-            <div style="border-bottom: 1px solid #222; padding: 15px 0;"><span style="color:var(--neon)">F2: DESPLIEGUE</span><p style="color:white; font-size:0.85rem; text-transform:none; margin-top:5px;">7 Seeds Matrix en flujo. Estabilización neuronal.</p></div>
-            <div style="border-bottom: 1px solid #222; padding: 15px 0;"><span style="color:var(--neon)">F3: SINTONÍA</span><p style="color:white; font-size:0.85rem; text-transform:none; margin-top:5px;">Integración de aminoácidos. Sello de flujo lineal.</p></div>
-            <div style="border-bottom: 1px solid #222; padding: 15px 0;"><span style="color:var(--neon)">F4: SISTEMA EN LÍNEA</span><p style="color:white; font-size:0.85rem; text-transform:none; margin-top:5px;">Homeostasis completada. Operando bajo Art-Sana.</p></div>
+        <div class="header"><h1>ABSORCIÓN</h1></div>
+        <div style="margin-top:10px;">
+            <div class="phase-row">
+                <div class="p-info"><span>FASE 1: BIO-RECONOCIMIENTO</span><span>25%</span></div>
+                <div class="p-action"><b>ACCIÓN:</b> DETECCIÓN DE BIO-CATALIZADORES. INICIO DE CARGA DE ELECTROLITOS.</div>
+                <div class="bar-bg"><div class="bar-fill" style="width:25%"></div></div>
+            </div>
+            <div class="phase-row">
+                <div class="p-info"><span>FASE 2: DESPLIEGUE ESTRUCTURAL</span><span>50%</span></div>
+                <div class="p-action"><b>ACCIÓN:</b> 7 SEEDS MATRIX EN PROCESO. ESTABILIZACIÓN NEURONAL.</div>
+                <div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div>
+            </div>
+            <div class="phase-row">
+                <div class="p-info"><span>FASE 3: SINTONÍA DE ENERGÍA</span><span>75%</span></div>
+                <div class="p-action"><b>ACCIÓN:</b> INTEGRACIÓN DE AMINOÁCIDOS. SELLO DE FLUJO LINEAL.</div>
+                <div class="bar-bg"><div class="bar-fill" style="width:75%"></div></div>
+            </div>
+            <div class="phase-row">
+                <div class="p-info"><span>FASE 4: SISTEMA EN LÍNEA</span><span>100%</span></div>
+                <div class="p-action"><b>ACCIÓN:</b> HOMEOSTASIS COMPLETADA. OPERANDO BAJO ART-SANA.</div>
+                <div class="bar-bg"><div class="bar-fill" style="width:100%"></div></div>
+            </div>
         </div>
         <div class="fixed-bottom" id="btn2" style="display:none;"><button class="btn" onclick="go(3)">VER MANIFIESTO</button></div>
-    </div>
-
-    <div id="p3" class="tab">
-        <div class="top"><div class="header"><h1>OBJETIVO</h1></div></div>
-        <div class="manifesto-container">
-            <p class="manifesto">"Nos distanciamos de lo químico porque el cuerpo exige arquitectura real. Usamos lo natural y local para recuperar tu soberanía."</p>
-            <div style="color:var(--neon); font-size:1.3rem; font-weight:bold; margin: 25px 0;">SOMOS ART-SANA,<br>LO DEMÁS SON GOLOSINAS.</div>
-            <div class="locked-btn">🔒 RED VITALY [ACCESO RESTRINGIDO]<br><span style="font-size:0.65rem; color:#444">RANGO: BIO-ARQUITECTA REQUERIDO</span></div>
-        </div>
-        <div class="fixed-bottom" id="btn3" style="display:none;"><button class="btn" style="background:#111; color:var(--neon); border:1px solid var(--neon);" onclick="go(1)">REINICIAR SISTEMA</button></div>
     </div>
 </div>
 
 <script>
-    // SECUENCIA DE ESCANEO A VELOCIDAD REDUCIDA (A LA MITAD)
-    const seeds = ["CHÍA", "LINAZA", "ZAPALLO", "SÉSAMO", "MANÍ", "COCO", "AVENA"];
-    let i = 0;
-    const matrixText = document.getElementById('matrix-text');
-    
-    // Intervalo de 800ms (antes 400ms) para que sea más lento y dramático
-    const scanInterval = setInterval(() => {
-        matrixText.innerText = `IDENTIFICANDO: ${seeds[i]} ... [OK]`;
-        i++;
-        if(i >= seeds.length) {
-            clearInterval(scanInterval);
-            setTimeout(() => {
-                matrixText.innerText = "ESTRUCTURA BIOLÓGICA VALIDADA.";
+    let audioCtx;
+    function playBeep(freq, duration) {
+        if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+    }
+
+    let started = false;
+    function initSystem() {
+        if(started) return;
+        started = true;
+        document.getElementById('tap-msg').style.display = 'none';
+        
+        const seeds = ["CHÍA", "LINAZA", "ZAPALLO", "SÉSAMO", "MANÍ", "COCO", "AVENA"];
+        let i = 0;
+        const matrixText = document.getElementById('matrix-text');
+        
+        const scanInterval = setInterval(() => {
+            matrixText.innerText = `IDENTIFICANDO: ${seeds[i]} ... [OK]`;
+            playBeep(800 + (i * 100), 0.2); // Sonido digital que sube de tono
+            i++;
+            if(i >= seeds.length) {
+                clearInterval(scanInterval);
                 setTimeout(() => {
-                    document.getElementById('scanner-screen').style.opacity = '0';
-                    document.getElementById('scanner-screen').style.transition = 'opacity 1s ease';
+                    matrixText.innerText = "ESTRUCTURA VALIDADA.";
+                    playBeep(1200, 0.5); 
                     setTimeout(() => {
                         document.getElementById('scanner-screen').style.display = 'none';
                         document.getElementById('main-ui').style.display = 'flex';
                     }, 1000);
-                }, 1000);
-            }, 800);
-        }
-    }, 800);
+                }, 800);
+            }
+        }, 800);
+    }
 
     function go(n) {
-        for(let j=1; j<=3; j++) {
-            document.getElementById('p'+j).classList.remove('active');
-            document.getElementById('btn'+j).style.display = 'none';
-        }
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.fixed-bottom').forEach(b => b.style.display = 'none');
         document.getElementById('p'+n).classList.add('active');
         document.getElementById('btn'+n).style.display = 'block';
-        window.scrollTo(0,0);
     }
 
     let s = 1725;
